@@ -87,6 +87,17 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
+                                <label for="nip" class="form-label">
+                                    <i class="fas fa-id-badge text-primary me-1"></i>
+                                    NIP <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" 
+                                    id="nip" name="nip" value="{{ old('nip') }}" maxlength="18" required>
+                                @error('nip')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>                            
+                            <div class="col-md-6 mb-3">
                                 <label for="jenis_kelamin" class="form-label">
                                     <i class="fas fa-venus-mars text-primary me-1"></i>
                                     Jenis Kelamin <span class="text-danger">*</span>
@@ -189,7 +200,8 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">
+                            <button type="submit" id="btn-submit" class="btn btn-primary btn-lg">
+                                <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span>
                                 <i class="fas fa-paper-plane me-2"></i>
                                 Submit Permohonan TTE
                             </button>
@@ -204,16 +216,35 @@
 
 @push('scripts')
 <script>
+    // Batasi input angka di NIK
     document.getElementById('nik').addEventListener('input', function (e) {
         this.value = this.value.replace(/\D/g, '').substring(0, 16);
     });
-    
+
+    // Batasi input angka di NIP (18 digit)
+    document.getElementById('nip').addEventListener('input', function (e) {
+        this.value = this.value.replace(/\D/g, '').substring(0, 18);
+    });
+
+    // Validasi ukuran file (max 15MB)
     document.getElementById('foto_ktp').addEventListener('change', function (e) {
         const file = e.target.files[0];
-        if (file && file.size > 2 * 1024 * 1024) {
-            alert('Ukuran file terlalu besar. Maksimal 2MB.');
+        if (file && file.size > 15 * 1024 * 1024) {
+            alert('Ukuran file terlalu besar. Maksimal 15MB.');
             this.value = '';
         }
+    });
+
+    // Disable tombol submit + tampilkan loading saat submit
+    document.querySelector('form').addEventListener('submit', function () {
+        const btn = document.getElementById('btn-submit');
+        const spinner = btn.querySelector('.spinner-border');
+        const icon = btn.querySelector('i');
+
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        icon.classList.add('d-none');
+        btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status"></span> Mengirim...`;
     });
 </script>
 @endpush
