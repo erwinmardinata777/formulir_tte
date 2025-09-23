@@ -97,7 +97,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>                            
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="jenis_kelamin" class="form-label">
                                     <i class="fas fa-venus-mars text-primary me-1"></i>
                                     Jenis Kelamin <span class="text-danger">*</span>
