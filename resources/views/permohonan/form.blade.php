@@ -196,7 +196,7 @@
                             @error('foto_ktp')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <div class="form-text">Format: JPG, JPEG, PNG. Maksimal 2MB</div>
+                            <div class="form-text">Format: JPG, JPEG, PNG. Maksimal 15MB</div>
                         </div>
 
                         <div class="d-grid">
