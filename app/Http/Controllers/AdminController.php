@@ -29,13 +29,25 @@ class AdminController extends Controller
         ));
     }
 
-    public function permohonan()
+    public function permohonan(Request $request)
     {
-        $permohonan = PermohonanTte::with('opd')
-            ->orderBy('created_at', 'desc')
-            ->paginate(20);
+        $query = PermohonanTte::with('opd');
 
-        return view('admin.permohonan', compact('permohonan'));
+        // Filter OPD
+        if ($request->filled('opds_id')) {
+            $query->where('opds_id', $request->opds_id);
+        }
+
+        // Filter Status
+        if ($request->filled('status_permohonan')) {
+            $query->where('status_permohonan', $request->status_permohonan);
+        }
+
+        $permohonan = $query->orderBy('created_at', 'desc')->paginate(20);
+
+        $opds = Opd::orderBy('nama_opd')->get();
+
+        return view('admin.permohonan', compact('permohonan', 'opds'));
     }
 
     public function updateStatus(Request $request, PermohonanTte $permohonan)

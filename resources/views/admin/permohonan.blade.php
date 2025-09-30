@@ -34,6 +34,45 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <form method="GET" action="{{ route('admin.permohonan') }}" class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Filter OPD</label>
+                                        <select name="opds_id" class="form-select">
+                                            <option value="">-- Semua OPD --</option>
+                                            @foreach($opds as $opd)
+                                                <option value="{{ $opd->id }}" 
+                                                    {{ request('opds_id') == $opd->id ? 'selected' : '' }}>
+                                                    {{ $opd->nama_opd }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label">Filter Status</label>
+                                        <select name="status_permohonan" class="form-select">
+                                            <option value="">-- Semua Status --</option>
+                                            <option value="pending" {{ request('status_permohonan')=='pending' ? 'selected' : '' }}>Pending</option>
+                                            <option value="diproses" {{ request('status_permohonan')=='diproses' ? 'selected' : '' }}>Diproses</option>
+                                            <option value="selesai" {{ request('status_permohonan')=='selesai' ? 'selected' : '' }}>Selesai</option>
+                                            <option value="ditolak" {{ request('status_permohonan')=='ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <button type="submit" class="btn btn-primary me-2">
+                                            <i class="fas fa-filter me-1"></i> Filter
+                                        </button>
+                                        <a href="{{ route('admin.permohonan') }}" class="btn btn-secondary">
+                                            <i class="fas fa-sync me-1"></i> Reset
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
                         <table class="table table-hover">
                             <thead class="table-light">
                                 <tr>
@@ -55,6 +94,7 @@
                                         <small class="text-muted">
                                             {{ $item->tempat_lahir }}, {{ $item->tanggal_lahir->format('d/m/Y') }}<br>
                                             NIK: {{ $item->nik }}<br>
+                                            NIP: {{ $item->nip }}<br>
                                             {{ ucfirst($item->jenis_kelamin) }}
                                         </small>
                                     </td>

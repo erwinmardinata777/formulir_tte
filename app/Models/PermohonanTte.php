@@ -11,6 +11,7 @@ class PermohonanTte extends Model
         'tempat_lahir',
         'tanggal_lahir',
         'nik',
+        'nip',
         'jenis_kelamin',
         'nomor_telepon',
         'email',
