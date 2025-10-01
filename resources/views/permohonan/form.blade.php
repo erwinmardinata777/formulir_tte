@@ -129,11 +129,12 @@
                             <div class="col-md-6 mb-3">
                                 <label for="email" class="form-label">
                                     <i class="fas fa-envelope text-primary me-1"></i>
-                                    Email Instansi <span class="text-danger">*</span>
+                                    Email Instansi 
+                                    <!-- <span class="text-danger">*</span> -->
                                 </label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" 
                                        id="email" name="email" value="{{ old('email') }}" 
-                                       placeholder="nama@sumbawakab.go.id" required>
+                                       placeholder="" required>
                                 @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

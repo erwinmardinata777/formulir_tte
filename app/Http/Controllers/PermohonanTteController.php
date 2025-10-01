@@ -25,7 +25,7 @@ class PermohonanTteController extends Controller
             'nip' => 'required|string|max:18|unique:permohonan_ttes,nip',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan',
             'nomor_telepon' => 'required|string|max:20',
-            'email' => 'required|email|ends_with:@sumbawakab.go.id',
+            'email' => 'nullable|email',
             'jabatan' => 'required|string|max:255',
             'golongan' => 'required|string|max:50',
             'opds_id' => 'required|exists:opds,id',
