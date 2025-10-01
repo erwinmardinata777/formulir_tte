@@ -138,7 +138,7 @@
                                 @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                <div class="form-text">Email harus menggunakan domain @sumbawakab.go.id</div>
+                                <!-- <div class="form-text">Email harus menggunakan domain @sumbawakab.go.id</div> -->
                             </div>
                         </div>
 
