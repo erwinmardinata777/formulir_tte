@@ -27,7 +27,7 @@ class PermohonanTteController extends Controller
             'nomor_telepon' => 'required|string|max:20',
             'email' => 'nullable|email',
             'jabatan' => 'required|string|max:255',
-            'golongan' => 'required|string|max:50',
+            'golongan' => 'nullable|string|max:50',
             'opds_id' => 'required|exists:opds,id',
             'foto_ktp' => 'required|image|mimes:jpeg,png,jpg|max:15360' // 15 MB
         ], [

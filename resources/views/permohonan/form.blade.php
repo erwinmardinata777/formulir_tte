@@ -157,11 +157,11 @@
                             <div class="col-md-6 mb-3">
                                 <label for="golongan" class="form-label">
                                     <i class="fas fa-star text-primary me-1"></i>
-                                    Golongan <span class="text-danger">*</span>
+                                    Golongan 
                                 </label>
                                 <input type="text" class="form-control @error('golongan') is-invalid @enderror" 
                                        id="golongan" name="golongan" value="{{ old('golongan') }}" 
-                                       placeholder="Contoh: III/a" required>
+                                       placeholder="Contoh: III/a">
                                 @error('golongan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
