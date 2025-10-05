@@ -22,7 +22,7 @@ class PermohonanTteController extends Controller
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'nik' => 'required|string|size:16|unique:permohonan_ttes,nik',
-            'nip' => 'required|string|max:18|unique:permohonan_ttes,nip',
+            'nip' => 'nullable|string|max:18|unique:permohonan_ttes,nip',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan',
             'nomor_telepon' => 'required|string|max:20',
             'email' => 'nullable|email',
@@ -34,7 +34,6 @@ class PermohonanTteController extends Controller
             'email.ends_with' => 'Email harus menggunakan domain @sumbawakab.go.id',
             'nik.size' => 'NIK harus terdiri dari 16 digit',
             'nik.unique' => 'NIK sudah terdaftar sebelumnya',
-            'nip.required' => 'NIP wajib diisi',
             'nip.unique' => 'NIP sudah terdaftar sebelumnya',
             'foto_ktp.max' => 'Ukuran file maksimal 15MB'
         ]);

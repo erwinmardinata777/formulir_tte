@@ -89,10 +89,10 @@
                             <div class="col-md-6 mb-3">
                                 <label for="nip" class="form-label">
                                     <i class="fas fa-id-badge text-primary me-1"></i>
-                                    NIP <span class="text-danger">*</span>
+                                    NIP (Jika Ada)
                                 </label>
                                 <input type="text" class="form-control @error('nip') is-invalid @enderror" 
-                                    id="nip" name="nip" value="{{ old('nip') }}" maxlength="18" required>
+                                    id="nip" name="nip" value="{{ old('nip') }}" maxlength="18">
                                 @error('nip')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
