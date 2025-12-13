@@ -68,8 +68,12 @@
                                     <button type="submit" class="btn btn-primary me-2">
                                         <i class="fas fa-filter me-1"></i> Filter
                                     </button>
-                                    <a href="{{ route('admin.permohonan') }}" class="btn btn-secondary">
+                                    <a href="{{ route('admin.permohonan') }}" class="btn btn-secondary me-2">
                                         <i class="fas fa-sync me-1"></i> Reset
+                                    </a>
+                                    <!-- Tombol Export -->
+                                    <a href="{{ route('admin.permohonan.export', request()->query()) }}" class="btn btn-success">
+                                        <i class="fas fa-download me-1"></i> Export Excel
                                     </a>
                                 </div>
                             </form>

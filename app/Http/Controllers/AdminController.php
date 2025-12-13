@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PermohonanTte;
 use App\Models\Opd;
 use App\Models\Nip;
+use App\Exports\PermohonanTteExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -64,6 +66,36 @@ class AdminController extends Controller
         $perangkatDaerahs = Nip::distinct()->pluck('perangkat_daerah');
 
         return view('admin.permohonan', compact('permohonan', 'opds', 'perangkatDaerahs'));
+    }
+
+    public function export(Request $request)
+    {
+        $query = PermohonanTte::with(['opd', 'nipData']);
+
+        // Apply the same filters as in permohonan method
+        if ($request->filled('nama')) {
+            $query->where('nama_lengkap', 'like', '%' . $request->nama . '%');
+        }
+
+        if ($request->filled('opds_id')) {
+            $query->where('opds_id', $request->opds_id);
+        }
+
+        if ($request->filled('status_permohonan')) {
+            $query->where('status_permohonan', $request->status_permohonan);
+        }
+
+        if ($request->filled('perangkat_daerah')) {
+            $query->whereHas('nipData', function($q) use ($request) {
+                $q->where('perangkat_daerah', 'like', '%' . $request->perangkat_daerah . '%');
+            });
+        }
+
+        $permohonan = $query->orderBy('created_at', 'desc')->get();
+
+        $fileName = 'Permohonan_TTE_' . now()->format('d-m-Y_H-i-s') . '.xlsx';
+        
+        return Excel::download(new PermohonanTteExport($permohonan), $fileName);
     }
 
     public function updateStatus(Request $request, PermohonanTte $permohonan)

@@ -25,4 +25,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/permohonan', [AdminController::class, 'permohonan'])->name('admin.permohonan');
     Route::patch('/permohonan/{permohonan}/status', [AdminController::class, 'updateStatus'])->name('admin.permohonan.status');
+    Route::get('/permohonan/export', [AdminController::class, 'export'])->name('admin.permohonan.export');    
 });
