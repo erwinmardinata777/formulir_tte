@@ -95,7 +95,7 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Instansi</th>
-                                    <th>Email</th>
+                                    <th>Kontak</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
                                 </tr>
@@ -105,11 +105,37 @@
                                 <tr>
                                     <td>
                                         <strong>{{ $item->nama_lengkap }}</strong><br>
-                                        <small class="text-muted">{{ $item->jabatan }}</small>
+                                        <small class="text-muted">
+                                            {{ $item->jabatan }}
+                                            @if($item->golongan)
+                                                <br>Gol. {{ $item->golongan }}
+                                            @endif
+                                        </small>
                                     </td>
-                                    <td>{{ $item->opd->nama_opd }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
+                                    <td>
+                                        @if($item->nipData)
+                                            <strong>{{ $item->nipData->perangkat_daerah }}</strong>
+                                            @if($item->nip)
+                                                <br><small class="text-muted">NIP: {{ $item->nip }}</small>
+                                            @endif
+                                        @else
+                                            <strong>{{ $item->opd->nama_opd }}</strong>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <small>
+                                            <i class="fas fa-phone text-primary me-1"></i>{{ $item->nomor_telepon }}
+                                            @if($item->email)
+                                                <br><i class="fas fa-envelope text-primary me-1"></i>{{ $item->email }}
+                                            @endif
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <small>
+                                            {{ $item->created_at->format('d/m/Y') }}<br>
+                                            <span class="text-muted">{{ $item->created_at->format('H:i') }} WITA</span>
+                                        </small>
+                                    </td>
                                     <td>
                                         <span class="status-badge status-{{ $item->status_permohonan }}">
                                             {{ ucfirst($item->status_permohonan) }}
@@ -118,7 +144,10 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">Belum ada permohonan</td>
+                                    <td colspan="5" class="text-center py-4">
+                                        <i class="fas fa-inbox fa-3x text-muted mb-3 d-block"></i>
+                                        <p class="text-muted">Belum ada permohonan</p>
+                                    </td>
                                 </tr>
                                 @endforelse
                             </tbody>
