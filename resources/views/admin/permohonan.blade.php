@@ -27,7 +27,7 @@
                                            value="{{ request('nama') }}">
                                 </div>
 
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <label class="form-label">Filter OPD</label>
                                     <select name="opds_id" class="form-select select2-opd" id="select-opd">
                                         <option value="">-- Semua OPD --</option>
@@ -38,7 +38,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> -->
 
                                 <div class="col-md-3">
                                     <label class="form-label">Filter Perangkat Daerah</label>
