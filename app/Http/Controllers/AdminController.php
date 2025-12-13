@@ -56,7 +56,7 @@ class AdminController extends Controller
             });
         }
 
-        $permohonan = $query->orderBy('created_at', 'desc')->paginate(1)->withQueryString();
+        $permohonan = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
 
         $opds = Opd::where('status', 'aktif')->orderBy('nama_opd')->get();
         
