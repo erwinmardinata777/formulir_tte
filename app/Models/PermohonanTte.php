@@ -32,4 +32,10 @@ class PermohonanTte extends Model
     {
         return $this->belongsTo(Opd::class, 'opds_id');
     }
+
+    // Tambahkan relasi ke Nip
+    public function nipData()
+    {
+        return $this->belongsTo(Nip::class, 'nip', 'nip');
+    }
 }
