@@ -4,24 +4,8 @@
 
 @section('content')
 <div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="text-white">
-                    <i class="fas fa-file-alt me-2"></i>Data Permohonan TTE
-                </h2>
-            </div>
-        </div>
-    </div>
-
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="fas fa-check-circle me-2"></i>
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    @endif
-
+    <!-- ... Kode sebelumnya tetap sama ... -->
+    
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -45,7 +29,7 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">Filter OPD</label>
-                                    <select name="opds_id" class="form-select">
+                                    <select name="opds_id" class="form-select select2-opd" id="select-opd">
                                         <option value="">-- Semua OPD --</option>
                                         @foreach($opds as $opd)
                                             <option value="{{ $opd->id }}" 
@@ -58,7 +42,7 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">Filter Perangkat Daerah</label>
-                                    <select name="perangkat_daerah" class="form-select">
+                                    <select name="perangkat_daerah" class="form-select select2-pd" id="select-pd">
                                         <option value="">-- Semua Perangkat Daerah --</option>
                                         @foreach($perangkatDaerahs as $pd)
                                             <option value="{{ $pd }}" 
@@ -71,7 +55,7 @@
 
                                 <div class="col-md-3">
                                     <label class="form-label">Filter Status</label>
-                                    <select name="status_permohonan" class="form-select">
+                                    <select name="status_permohonan" class="form-select select2-status" id="select-status">
                                         <option value="">-- Semua Status --</option>
                                         <option value="pending" {{ request('status_permohonan')=='pending' ? 'selected' : '' }}>Pending</option>
                                         <option value="diproses" {{ request('status_permohonan')=='diproses' ? 'selected' : '' }}>Diproses</option>
@@ -240,10 +224,41 @@
                         </div>
                     </div>
                     @endif
-
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Initialize Select2 untuk Filter OPD
+        $('.select2-opd').select2({
+            theme: 'bootstrap-5',
+            placeholder: '-- Pilih OPD --',
+            allowClear: true,
+            width: '100%'
+        });
+
+        // Initialize Select2 untuk Filter Perangkat Daerah
+        $('.select2-pd').select2({
+            theme: 'bootstrap-5',
+            placeholder: '-- Pilih Perangkat Daerah --',
+            allowClear: true,
+            width: '100%'
+        });
+
+        // Initialize Select2 untuk Filter Status
+        $('.select2-status').select2({
+            theme: 'bootstrap-5',
+            placeholder: '-- Pilih Status --',
+            allowClear: true,
+            width: '100%',
+            minimumResultsForSearch: Infinity // Disable search untuk status (karena pilihan sedikit)
+        });
+    });
+</script>
+@endpush
