@@ -217,6 +217,25 @@
 
 @push('scripts')
 <script>
+    $(document).ready(function() {
+        // Initialize Select2 untuk Jenis Kelamin
+        $('#jenis_kelamin').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Pilih Jenis Kelamin',
+            allowClear: false,
+            width: '100%',
+            minimumResultsForSearch: Infinity // Disable search untuk pilihan sedikit
+        });
+
+        // Initialize Select2 untuk Instansi/OPD
+        $('#opds_id').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Pilih Instansi/OPD',
+            allowClear: true,
+            width: '100%'
+        });
+    });
+
     // Batasi input angka di NIK
     document.getElementById('nik').addEventListener('input', function (e) {
         this.value = this.value.replace(/\D/g, '').substring(0, 16);
